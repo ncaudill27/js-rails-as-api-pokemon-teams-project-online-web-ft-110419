@@ -21,13 +21,13 @@ function trainersToDom(trainers) {
         let pokemonList = document.createElement('ul')
 
         trainer.pokemon.map( pokemon => {
+            let pokeLi = document.createElement('li')
+            pokeLi.innerText = `${pokemon.nickname} (${pokemon.species}) `
+            
             let releaseBtn = document.createElement('button')
             releaseBtn.setAttribute('class', 'release')
             releaseBtn.setAttribute('data-pokemon-id', `${pokemon.id}`)
             releaseBtn.innerText = 'Release'
-
-            let pokeLi = document.createElement('li')
-            pokeLi.innerText = `${pokemon.nickname} (${pokemon.species}) `
 
             pokeLi.appendChild(releaseBtn)
             pokemonList.appendChild(pokeLi)
@@ -74,7 +74,7 @@ function createPokemon(e) {
 
 function addPokemonToCard(pokemon, trainerId) {
     let trainerCard = document.querySelector(`div[data-id="${trainerId}"]`)
-    let pokeList = trainerCard.querySelector('ul')
+    let pokemonList = trainerCard.querySelector('ul')
 
     let newPokemon = document.createElement('li')
     newPokemon.innerText = `${pokemon.nickname} (${pokemon.species}) `
@@ -86,8 +86,7 @@ function addPokemonToCard(pokemon, trainerId) {
 
 
     newPokemon.appendChild(releaseBtn)
-    pokeList.appendChild(newPokemon)
-    console.log(pokeList)
+    pokemonList.appendChild(newPokemon)
 }
 
 function handlePokemonAdd(event) {
