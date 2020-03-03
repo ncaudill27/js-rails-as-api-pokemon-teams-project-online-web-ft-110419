@@ -87,12 +87,16 @@ function addPokemonToCard(pokemon, trainerId) {
 
     newPokemon.appendChild(releaseBtn)
     pokeList.appendChild(newPokemon)
-    trainerCard.appendChild(pokemon)
     console.log(pokeList)
 }
 
 function handlePokemonAdd(event) {
-    console.log(event.target)
+    trainerId = event.target.getAttribute('data-trainer-id')
+    trainerCard = document.querySelector(`div[data-id="${trainerId}"]`)
+    pokemonList = trainerCard.querySelector('ul')
+    if (pokemonList.children.length < 6) {
+        createPokemon(event)
+    }
 }
 
 function addEventListeners() {
