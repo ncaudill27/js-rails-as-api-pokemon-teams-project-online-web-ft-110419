@@ -69,12 +69,26 @@ function createPokemon(e) {
         body: (JSON.stringify(trainerId))
     })
     .then(response => response.json())
-    .then(pokemon =>  console.log(pokemon))
+    .then(pokemon =>  addPokemonToCard(pokemon, trainerId))
 }
 
 function addPokemonToCard(pokemon, trainerId) {
     let trainerCard = document.querySelector(`div[data-id="${trainerId}"]`)
-    console.log(trainerCard)
+    let pokeList = trainerCard.querySelector('ul')
+
+    let newPokemon = document.createElement('li')
+    newPokemon.innerText = `${pokemon.nickname} (${pokemon.species}) `
+
+    let releaseBtn = document.createElement('button')
+    releaseBtn.setAttribute('class', 'release')
+    releaseBtn.setAttribute('data-pokemon-id', `${pokemon.id}`)
+    releaseBtn.innerText = 'Release'
+
+
+    newPokemon.appendChild(releaseBtn)
+    pokeList.appendChild(newPokemon)
+    trainerCard.appendChild(pokemon)
+    console.log(pokeList)
 }
 
 function addEventListeners() {
