@@ -45,17 +45,21 @@ function trainersToDom(trainers) {
     })
 }
 
-function handlePokemonRelease(e) {
-    const pokemonId = e.target.getAttribute('data-pokemon-id')
-    fetch(`${POKEMONS_URL}/${pokemonId}`, {
-        method: 'DELETE',
-        headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
-        }
-    })
-    .then(response => response.json())
-    .then(pokemon => console.log(`Pokemon with id ${pokemon.id} deleted!`, pokemon))
+function addPokemonToCard(pokemon, trainerId) {
+    let trainerCard = document.querySelector(`div[data-id="${trainerId}"]`)
+    let pokemonList = trainerCard.querySelector('ul')
+
+    let newPokemon = document.createElement('li')
+    newPokemon.innerText = `${pokemon.nickname} (${pokemon.species}) `
+    
+    let releaseBtn = document.createElement('button')
+    releaseBtn.setAttribute('class', 'release')
+    releaseBtn.setAttribute('data-pokemon-id', `${pokemon.id}`)
+    releaseBtn.innerText = 'Release'
+    
+    
+    newPokemon.appendChild(releaseBtn)
+    pokemonList.appendChild(newPokemon)
 }
 
 function createPokemon(e) {
@@ -72,22 +76,6 @@ function createPokemon(e) {
     .then(pokemon =>  addPokemonToCard(pokemon, trainerId))
 }
 
-function addPokemonToCard(pokemon, trainerId) {
-    let trainerCard = document.querySelector(`div[data-id="${trainerId}"]`)
-    let pokemonList = trainerCard.querySelector('ul')
-
-    let newPokemon = document.createElement('li')
-    newPokemon.innerText = `${pokemon.nickname} (${pokemon.species}) `
-
-    let releaseBtn = document.createElement('button')
-    releaseBtn.setAttribute('class', 'release')
-    releaseBtn.setAttribute('data-pokemon-id', `${pokemon.id}`)
-    releaseBtn.innerText = 'Release'
-
-
-    newPokemon.appendChild(releaseBtn)
-    pokemonList.appendChild(newPokemon)
-}
 
 function handlePokemonAdd(event) {
     trainerId = event.target.getAttribute('data-trainer-id')
@@ -96,6 +84,19 @@ function handlePokemonAdd(event) {
     if (pokemonList.children.length < 6) {
         createPokemon(event)
     }
+}
+
+function handlePokemonRelease(e) {
+    const pokemonId = e.target.getAttribute('data-pokemon-id')
+    fetch(`${POKEMONS_URL}/${pokemonId}`, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        }
+    })
+    .then(response => response.json())
+    .then(pokemon => console.log(`Pokemon with id ${pokemon.id} deleted!`, pokemon))
 }
 
 function addEventListeners() {
