@@ -86,6 +86,15 @@ function handlePokemonAdd(event) {
     }
 }
 
+function removePokemon(pokemon, event) {
+    trainerCard = document.querySelector(`div[data-id="${pokemon.trainer_id}"]`)
+    // let pokemonId = event.target.getAttribute('data-pokemon-id')
+    // let allPokemon = document.querySelectorAll('li')
+    // allPokemon
+
+    console.log(trainerCard, event.parentNode)
+}
+
 function handlePokemonRelease(e) {
     const pokemonId = e.target.getAttribute('data-pokemon-id')
     fetch(`${POKEMONS_URL}/${pokemonId}`, {
@@ -96,7 +105,7 @@ function handlePokemonRelease(e) {
         }
     })
     .then(response => response.json())
-    .then(pokemon => console.log(`Pokemon with id ${pokemon.id} deleted!`, pokemon))
+    .then(pokemon => removePokemon(pokemon, e))
 }
 
 function addEventListeners() {
