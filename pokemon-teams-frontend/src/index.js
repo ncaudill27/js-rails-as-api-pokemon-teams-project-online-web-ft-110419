@@ -91,6 +91,10 @@ function addPokemonToCard(pokemon, trainerId) {
     console.log(pokeList)
 }
 
+function handlePokemonAdd(event) {
+    console.log(event.target)
+}
+
 function addEventListeners() {
     base.addEventListener('click', (event)=> {
         if (event.target.matches('li > button')) {
@@ -99,7 +103,7 @@ function addEventListeners() {
     })
     base.addEventListener('click', (event) => {
         if (event.target.matches('div > button')) {
-            createPokemon(event)
+            handlePokemonAdd(event)
         }
     })
 }
