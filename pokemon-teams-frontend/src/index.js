@@ -10,7 +10,7 @@ function getTrainers() {
 }
 
 function trainersToDom(trainers) {
-    trainers.forEach(trainer => {
+    trainers.forEach(  trainer => {
         let trainerName = document.createElement('p')
         trainerName.innerText = trainer.name
 
@@ -70,6 +70,11 @@ function createPokemon(e) {
     })
     .then(response => response.json())
     .then(pokemon =>  console.log(pokemon))
+}
+
+function addPokemonToCard(pokemon, trainerId) {
+    let trainerCard = document.querySelector(`div[data-id="${trainerId}"]`)
+    console.log(trainerCard)
 }
 
 function addEventListeners() {
