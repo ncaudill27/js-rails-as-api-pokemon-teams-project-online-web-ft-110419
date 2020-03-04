@@ -88,11 +88,21 @@ function handlePokemonAdd(event) {
 
 function removePokemon(pokemon, event) {
     trainerCard = document.querySelector(`div[data-id="${pokemon.trainer_id}"]`)
+    pokemonList = trainerCard.querySelector('ul')
+    let lis = trainerCard.querySelectorAll('li')
+    lis.forEach( li => {
+        if ((li.contains(event.target))) {
+            pokemonList.removeChild(li)
+        }
+    })
+    if (pokemonList.contains(event.target)) {
+    }
+
     // let pokemonId = event.target.getAttribute('data-pokemon-id')
     // let allPokemon = document.querySelectorAll('li')
     // allPokemon
 
-    console.log(trainerCard, event.parentNode)
+    
 }
 
 function handlePokemonRelease(e) {
